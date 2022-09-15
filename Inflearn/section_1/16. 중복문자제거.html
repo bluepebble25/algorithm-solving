@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 풀이 1
+      function solution(str) {
+        let answer = '';
+        let duplicated = [];
+
+        for (let x of str) {
+          // 중복되지 않았다면
+          if (!duplicated.includes(x)) {
+            duplicated.push(x);
+            answer += x;
+          }
+        }
+
+        return answer;
+      }
+
+      // 풀이 2
+      /*
+      function solution(str) {
+        let answer = '';
+
+        // 현재 문자의 인덱스 > str.indexOf(현재문자)라면 이미 앞에 중복되는 문자가 있음
+        // 따라서 중복되지 않은 문자란 자신의 인덱스와 처음으로 나온 indexOf가 동일해야 함
+        for (let i = 0; i < str.length; i++) {
+          if (i === str.indexOf(str[i])) {
+            answer += str[i];
+          }
+        }
+
+        return answer;
+      }
+      */
+
+      let str = 'ksekkset';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

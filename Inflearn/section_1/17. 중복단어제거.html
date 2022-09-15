@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 풀이 1
+      function solution(arr) {
+        let answer = [];
+
+        arr.forEach((word) => {
+          if (!answer.includes(word)) {
+            answer.push(word);
+          }
+        });
+
+        return answer;
+      }
+
+      // 풀이2 - 맨 처음으로 등장하는 요소라면 indexOf와 인덱스가 같음을 이용
+      /*
+      function solution(arr) {
+        let answer = [];
+        answer = arr.filter((word, i) => i === arr.indexOf(word));
+        return answer;
+      }
+      */
+
+      let arr = ['good', 'time', 'good', 'time', 'student'];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 풀이 1
+      /*
+      function solution(str) {
+        let answer;
+        answer = str.toUpperCase();
+        return answer;
+      }
+      */
+
+      // 풀이2
+      function solution(str) {
+        let answer = '';
+        for (let x of str) {
+          let charNum = x.charCodeAt();
+          if (charNum >= 97 && charNum <= 122) {
+            answer += String.fromCharCode(charNum - 32);
+          } else {
+            answer += x;
+          }
+        }
+        return answer;
+      }
+
+      let str = 'ItisTimeToStudy';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

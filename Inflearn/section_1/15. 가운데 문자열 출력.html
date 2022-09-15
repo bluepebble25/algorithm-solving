@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        let answer;
+
+        if (str.length % 2 === 0) {
+          let i = str.length / 2;
+          answer = str[i - 1] + str[i];
+        } else {
+          let i = (str.length - 1) / 2;
+          answer = str[i];
+        }
+
+        return answer;
+      }
+
+      let str = 'study';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

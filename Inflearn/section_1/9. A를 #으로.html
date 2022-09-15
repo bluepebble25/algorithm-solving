@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 풀이 1
+      function solution_1(word) {
+        let answer = '';
+        for (let x of word) {
+          if (x === 'A') {
+            answer += '#';
+          } else {
+            answer += x;
+          }
+        }
+        return answer;
+      }
+
+      // 풀이 2
+      function solution_2(word) {
+        let answer = word.replace(/A/g, '#');
+        return answer;
+      }
+
+      let word = 'BANANA';
+      console.log(solution_1(word));
+      console.log(solution_2(word));
+    </script>
+  </body>
+</html>
