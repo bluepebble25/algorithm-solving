@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let max = Number.MIN_SAFE_INTEGER;
+        let n = arr.length;
+
+        // 행, 열 합 중 최대값 찾기
+        for (let i = 0; i < n; i++) {
+          let rowSum = 0,
+            columnSum = 0;
+          for (let j = 0; j < n; j++) {
+            rowSum += arr[i][j];
+            columnSum += arr[j][i];
+          }
+          max = Math.max(max, rowSum, columnSum);
+        }
+
+        // 대각선 2개 최대값
+        let cross1 = 0,
+          cross2 = 0;
+
+        for (let i = 0; i < n; i++) {
+          cross1 += arr[i][i];
+          cross2 += arr[i][n - i - 1];
+        }
+        max = Math.max(max, cross1, cross2);
+
+        return max;
+      }
+
+      let arr = [
+        [10, 13, 10, 12, 15],
+        [12, 39, 30, 23, 11],
+        [11, 25, 50, 53, 15],
+        [19, 27, 29, 37, 27],
+        [19, 13, 30, 13, 19],
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
