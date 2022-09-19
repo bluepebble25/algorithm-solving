@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /* 
+      1. i+1이 자신과 다른 문자면 answer에 문자를 더한다.
+          만약 count가 1이면 문자만 더하고 1 초과면 count도 더한다.
+          그 다음 count를 1로 초기화한다.
+      2. i+1이 자신과 같은 문자면 count++을 한다.
+      */
+
+      function solution(str) {
+        let answer = '';
+        let count = 1;
+        for (let i = 0; i < str.length; i++) {
+          if (str[i + 1] !== str[i]) {
+            console.log(i, str[i + 1]);
+            answer += str[i];
+            if (count !== 1) answer += count;
+            count = 1;
+          } else {
+            count++;
+          }
+        }
+
+        return answer;
+      }
+
+      let str = 'KKHSSSSSSSE';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        let answer = 'YES';
+        str = str.toLowerCase();
+
+        // regex로 알파벳 이외의 것은 싹 빼버리기
+        str = str.replace(/[^a-z]/g, '');
+
+        // 뒤집어서 자기 자신과 같지 않으면 회문이 아님
+        if (str !== str.split('').reverse().join('')) answer = 'NO';
+
+        return answer;
+      }
+
+      let str = 'found7, time: study; Yduts; emit, 7Dnuof';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
