@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 최대한 많이 사려면 가격 + 배송비가 제일 작은것부터 산다. 합을 기준으로 오름차순 정렬
+      // 쿠폰을 적용할 수 있는 모든 가능한 경우의 수를 시도한다.
+
+      function solution(M, arr) {
+        let max = Number.MIN_SAFE_INTEGER;
+
+        arr.sort((a, b) => a[0] + a[1] - (b[0] + b[1]));
+
+        for (let i = 0; i < arr.length; i++) {
+          let acc = 0;
+          let count = 1; // 쿠폰 먹여서 이미 한 개 확실히 샀음.
+          acc += arr[i][0] / 2 + arr[i][1];
+
+          for (let j = 0; j < arr.length; j++) {
+            if (j === i) {
+              continue;
+            }
+            let price = arr[j][0] + arr[j][1];
+            if (acc + price <= M) {
+              acc += price;
+              ++count;
+            } else {
+              max = Math.max(max, count);
+            }
+          }
+        }
+        return max;
+      }
+
+      let arr = [
+        [6, 6],
+        [2, 2],
+        [4, 3],
+        [4, 5],
+        [10, 3],
+      ];
+      console.log(solution(28, arr));
+    </script>
+  </body>
+</html>

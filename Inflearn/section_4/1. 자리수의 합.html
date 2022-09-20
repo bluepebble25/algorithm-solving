@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 바깥 for of문 돌면서
+      // 안쪽에서 while문으로 % 10 값 더하고, parseInt(10으로 나눈 값) % 10 값을 더하기 반복.
+      // 10으로 나누고 정수 변환한 값이 0이 될때까지
+      // 만약 sum, max가 같다면 max에 해당되는 숫자와 현재 숫자 중 max 값 대입
+      function solution(arr) {
+        let answer;
+        let max = Number.MIN_SAFE_INTEGER;
+
+        for (let num of arr) {
+          let sum = 0,
+            temp = num;
+          while (temp > 0) {
+            sum += temp % 10;
+            temp = parseInt(temp / 10);
+          }
+          if (max < sum) {
+            max = sum;
+            answer = num;
+          } else if (max === sum) {
+            answer = Math.max(answer, num);
+          }
+        }
+
+        return answer;
+      }
+
+      let arr = [128, 460, 603, 40, 521, 137, 123];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

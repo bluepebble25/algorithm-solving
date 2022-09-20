@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 바깥 for문 i로 mento 고정, 안쪽 for문 j = i+1부터 끝까지 mentee 정함
+      // j for문에서 mentee 정했으면 k for문으로 각 시험을 돌면서 mento와 mentee의 indexOf 검사
+      // mento의 index가 mentee의 index보다 크면 등수 낮다는 것이므로 flag = false로 바꾸고 k for문 중지
+      // flag = true 유지했다면 멘토링 OK
+      function solution(arr) {
+        let answer = 0;
+        let M = arr.length;
+        let N = arr[0].length;
+        let mento, mentee;
+
+        if (M === 1 && N !== 1) {
+          answer = 1;
+
+          // !(N-1)
+          for (let i = N - 1; i > 1; i--) {
+            answer = answer * i;
+          }
+          return answer;
+        }
+        if (N === 1) {
+          return (answer = 1);
+        }
+
+        for (let i = 0; i < N - 1; i++) {
+          mento = arr[0][i];
+          for (let j = i + 1; j < N; j++) {
+            let flag = true;
+            mentee = arr[0][j];
+            for (let k = 1; k < M; k++) {
+              if (arr[k].indexOf(mento) > arr[k].indexOf(mentee)) {
+                flag = false;
+                break;
+              }
+            }
+            if (flag) ++answer;
+            console.log(mento, mentee, answer);
+          }
+        }
+
+        return answer;
+      }
+
+      let arr = [
+        [3, 4, 1, 2],
+        [4, 3, 2, 1],
+        [3, 1, 4, 2],
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
