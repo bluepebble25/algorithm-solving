@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+      1. 두 배열에 각각 포인터를 놓고 둘의 크기를 비교한다. 더 작은 쪽을 결과 배열에 push한다.
+         push하게 된 원소를 가진 배열의 포인터를 1 증가시킨다.
+         만약 크기가 같다면 둘 다 push하고 포인터를 둘다 증가시킨다.
+      2. while문으로 두 포인터가 배열의 길이보다 작을 때까지 증가시키다가
+         한쪽 포인터가 배열 길이와 같아지는 순간 다른 배열 중 남은 것을 slice로 통채로 push한다.
+      */
+      // Tip! answer.push(a[p1++])을 하면 후위 연산자이기 때문에 push한 다음 1 증가된다!
+      function solution(a, b) {
+        let answer = [];
+        let p1 = 0,
+          p2 = 0;
+        while (p1 < a.length && p2 < b.length) {
+          if (a[p1] === b[p2]) {
+            answer.push(a[p1], b[p2]);
+            p1++;
+            p2++;
+          } else if (a[p1] < b[p1]) {
+            answer.push(a[p1]);
+            p1++;
+          } else {
+            answer.push(b[p2]);
+            p2++;
+          }
+        }
+        if (p1 < a.length) {
+          answer.push(...a.slice(p1));
+        } else if (p2 < b.length) {
+          answer.push(...b.slice(p2));
+        }
+
+        return answer;
+      }
+
+      let a = [1, 3, 5];
+      let b = [2, 3, 6, 7, 9];
+      console.log(...solution(a, b));
+    </script>
+  </body>
+</html>

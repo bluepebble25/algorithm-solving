@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // str1의 알파벳과 개수를 먼저 구하고,
+      // str2에서도 알파벳과 개수 구하는 과정에서 str1에 없던 알파벳이라면 바로 NO로 종료
+      // str1과 str2 개수 센 것 돌면서 개수가 같지 않다면 NO, 무사히 돌면 YES return
+      function solution(str1, str2) {
+        let answer = 'YES';
+        let obj1 = {};
+        let obj2 = {};
+
+        for (let s of str1) {
+          if (s in obj1) {
+            obj1[s]++;
+          } else {
+            obj1[s] = 1;
+          }
+        }
+
+        for (let s of str2) {
+          if (!(s in obj1)) return 'NO';
+          if (s in obj2) {
+            obj2[s]++;
+          } else {
+            obj2[s] = 1;
+          }
+        }
+
+        for (let key in obj1) {
+          if (obj1[key] !== obj2[key]) return 'NO';
+        }
+
+        return answer;
+      }
+
+      let a = 'AbaAeCe';
+      let b = 'baeeACA';
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
