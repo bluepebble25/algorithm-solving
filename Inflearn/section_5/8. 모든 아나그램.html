@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        1. T의 문자열 개수를 해쉬로 센다.
+        2. T문자열 길이만큼의 S문자열의 해쉬 초기값을 만든다. 비교하고 count++
+        3. p2에 해당되는 것 더하고 p1에 해당되는 것 빼서 슬라이딩 윈도우를 옆으로 이동시키며
+           S와 값이 같은지 비교하고 count++
+           - 비교 방법은 두 맵의 사이즈가 같은지, key 둘 다 갖고 있는지, value가 같은지
+      */
+
+      function compareMaps(map1, map2) {
+        if (map1.size !== map2.size) return false;
+        for (let [key, value] of map1) {
+          if (!map2.has(key) || value !== map2.get(key)) return false;
+        }
+        return true;
+      }
+
+      function solution(s, t) {
+        let count = 0;
+        let sH = new Map();
+        let tH = new Map();
+        let p1 = 0;
+
+        // T 문자열 개수 세기
+        for (let x of t) {
+          if (tH.has(x)) {
+            tH.set(x, tH.get(x) + 1);
+          } else {
+            tH.set(x, 1);
+          }
+        }
+
+        // S 초기값
+        for (let i = 0; i < t.length; i++) {
+          if (sH.has(s[i])) {
+            sH.set(s[i], sH.get(s[i]) + 1);
+          } else {
+            sH.set(s[i], 1);
+          }
+        }
+        if (compareMaps(sH, tH)) count++;
+
+        // T문자열을 슬라이딩 윈도우 방식으로 검사하기
+        for (let p2 = t.length; p2 < s.length; p2++) {
+          // 오른쪽 부분 늘리기
+          if (sH.has(s[p2])) {
+            sH.set(s[p2], sH.get(s[p2]) + 1);
+          } else {
+            sH.set(s[p2], 1);
+          }
+
+          // 왼쪽 부분 줄이기
+          if (sH.get(s[p1]) === 1) {
+            sH.delete(s[p1]);
+          } else {
+            sH.set(s[p1], sH.get(s[p1]) - 1);
+          }
+          p1++;
+
+          // 비교
+          if (compareMaps(sH, tH)) count++;
+        }
+
+        return count;
+      }
+
+      let a = 'bacaAacba';
+      let b = 'abc';
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
