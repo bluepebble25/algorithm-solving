@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        1. ( 만나면 push, ) 만나면 pop
+        2. stack이 0일때만 문자 더하기
+      */
+      function solution(str) {
+        let answer = '';
+        let stack = [];
+
+        for (let x of str) {
+          if (x === '(') {
+            stack.push(x);
+          } else if (x === ')') {
+            stack.pop();
+          } else {
+            if (stack.length === 0) {
+              answer += x;
+            }
+          }
+        }
+
+        return answer;
+      }
+
+      let str = '(A(BC)D)EF(G(H)(IJ)K)LM(N)';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

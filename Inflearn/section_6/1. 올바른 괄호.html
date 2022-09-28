@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        1. (는 push
+        2. ) 만나면 pop, 만약 ) 만났는데 stack 크기가 이미 0이라면 앞에서 잘못돼었다는 것이므로 return NO
+        3. 만약 문자열 순회가 끝났는데 (가 남아있다면 return NO
+      */
+      function solution(str) {
+        let answer = 'YES';
+        let stack = [];
+
+        for (let x of str) {
+          if (x === '(') stack.push(x);
+          if (x === ')') {
+            if (stack.length === 0) {
+              return 'NO';
+            } else {
+              stack.pop();
+            }
+          }
+        }
+        if (stack.length > 0) return 'NO';
+
+        return answer;
+      }
+
+      let str = '(()(()))(()';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
