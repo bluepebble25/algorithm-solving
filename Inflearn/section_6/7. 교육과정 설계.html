@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        커리큘럼 for문으로 돌면서 필수과목의 맨 앞에 있는 것과 비교한다.
+        만약 같다면 필수과목 첫번째 원소 삭제 (shift)
+        최종적으로 큐에 남은게 있다면 교육과정 잘못짠거
+      */
+      function solution(essen, curri) {
+        let answer = 'YES';
+        let queue = essen.split('');
+
+        for (let x of curri) {
+          if (x === queue[0]) queue.shift();
+          if (queue.length === 0) return answer;
+        }
+        if (queue.length > 0) answer = 'NO';
+
+        return answer;
+      }
+
+      let essen = 'CBA';
+      let curri = 'CBDAGE';
+      console.log(solution(essen, curri));
+    </script>
+  </body>
+</html>

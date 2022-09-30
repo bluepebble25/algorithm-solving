@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        숫자는 push
+        연산자 만나면 pop, pop 하고 두 개를 연산한 다음 push
+      */
+      function solution(str) {
+        let answer;
+        let stack = [];
+
+        for (let x of str) {
+          let a = 0,
+            b = 0;
+          if (isNaN(x)) {
+            right = stack.pop();
+            left = stack.pop();
+            if (x === '+') {
+              stack.push(left + right);
+            } else if (x === '-') {
+              stack.push(left - right);
+            } else if (x === '/') {
+              stack.push(left / right);
+            } else if (x === '*') {
+              stack.push(left * right);
+            }
+          } else {
+            stack.push(Number(x));
+          }
+        }
+        answer = stack.pop();
+
+        return answer;
+      }
+
+      let str = '352+*9-';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

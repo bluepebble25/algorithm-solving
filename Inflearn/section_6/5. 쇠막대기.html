@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        ()면 레이저, 레이저 만나면 () 앞에 ((( 개수만큼 조각 생긴다.
+        ) 오면 한 막대기가 끝난다.
+
+        1. (가 오면 push,
+        2. ( 다음에 )가 바로 오면 레이저이고 pop,
+           () 앞에 있는 (의 개수는 겹쳐진 막대기들 개수이므로 (개수만큼 count 증가
+        3. ) 다음에 )가 바로 오면 한 막대기 끝났으므로 pop, 막대 마지막 조각 반영 count++
+      */
+      function solution(str) {
+        let count = 0;
+        let stack = [];
+
+        for (let i = 0; i < str.length; i++) {
+          if (str[i] === '(') {
+            stack.push(str[i]);
+          } else if (str[i] === ')') {
+            if (str[i - 1] === '(') {
+              // 레이저인 경우
+              stack.pop();
+              count += stack.length;
+            } else if (str[i - 1] === ')') {
+              // 한 쇠막대의 마지막인 경우
+              stack.pop();
+              count += 1;
+            }
+          }
+        }
+
+        return count;
+      }
+
+      let str = '()(((()())(())()))(())';
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
