@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        현재 작업이 배열에 존재하지 않는다면 unshift하고 맨 뒤의 것 pop
+        만약 존재한다면 splice로 그 부분 도려내고 맨 앞에 unshift
+      */
+      function solution(S, arr) {
+        let cache = Array.from({ length: S }, () => 0);
+        arr.forEach((curr) => {
+          if (curr in cache) {
+            cache.splice(cache.indexOf(curr), 1);
+            cache.unshift(curr);
+          } else {
+            cache.pop();
+            cache.unshift(curr);
+          }
+        });
+        return cache;
+      }
+
+      let arr = [1, 2, 3, 2, 6, 2, 3, 5, 7];
+      console.log(...solution(5, arr));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        선택정렬: N개의 요소를 처음부터 끝까지 흝으며 최솟값을 찾아 맨 앞에서부터 삽입한다. (교환해서)
+        i번과 바꾸기, j로 최소값 검사. j는 현재 i의 +1부터 검사
+        바꾸는건 구조분해할당 배열 이용
+      */
+      function solution(arr) {
+        let N = arr.length;
+
+        for (let i = 0; i < N; i++) {
+          let minIndex = i;
+          for (let j = i + 1; j < N; j++) {
+            if (arr[j] < arr[minIndex]) {
+              minIndex = j;
+            }
+          }
+          [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+        }
+
+        return arr;
+      }
+
+      let arr = [13, 5, 11, 7, 23, 15];
+      console.log(...solution(arr));
+    </script>
+  </body>
+</html>

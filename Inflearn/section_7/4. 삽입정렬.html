@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        삽입정렬: 두번째부터 시작해서 자신의 앞을 훑으며 들어갈 위치를 찾는다.
+        바깥 for문 - 삽입할 대상, 2번째부터 시작
+        안쪽 for문 - j, j+1 둘이 비교해서 j가 j+1보다 크면 교환, 작으면 멈춤
+                    arr[i]가 arr[j]보다 크면 교환 중단
+        TIP! 앗... j for문에서 arr[i]로 현재 비교중인 값을 구했더니 배열이 변하는 과정에서 값이 달라진다. 따로 저장하자
+      */
+      function solution(arr) {
+        for (let i = 1; i < arr.length; i++) {
+          let currentValue = arr[i];
+          for (let j = i - 1; j >= 0 && arr[j] > currentValue; j--) {
+            if (arr[j] > arr[j + 1]) {
+              [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+          }
+        }
+        return arr;
+      }
+
+      let arr = [11, 7, 5, 6, 10, 9];
+      console.log(...solution(arr));
+    </script>
+  </body>
+</html>
