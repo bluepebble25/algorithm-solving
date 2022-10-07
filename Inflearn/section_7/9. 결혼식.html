@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        1. 도착 시간을 s, 떠나는 시간을 e라고 하자.
+          타임라인 막대를 그린 다음 도착이나 떠나는 점마다 사람 수의 변동이 오게된다.
+          s 만나면 +1, e 만나면 -1
+          배열의 시간을 모두 분리해서 s와 e로 분리한 다음 시간 순서대로 정렬한다.
+          [5,s], [12,s], [14, s], [14, e], ... 이런 식으로
+
+        2. 그런데 정렬할 때 시각이 같은 경우에는 어떤 순서로 정렬해야 할까?
+          ex) [14, s], [14, e] / [14, e], [14, s]
+
+          우리는 각 순간의 최고 숫자를 저장할 것이므로
+          <e 이벤트를 우선>해서 먼저 사람 수를 감소시키고 그 다음 s를 만나 증가시켜야 한다.
+      */
+      function solution(arr) {
+        let eventArr = [];
+        let count = 0;
+        let max = Number.MIN_SAFE_INTEGER;
+        arr.forEach((el) => {
+          eventArr.push([el[0], 's'], [el[1], 'e']);
+        });
+
+        eventArr.sort((a, b) => {
+          if (a[0] === b[0] && a[1] === 'e') return -1;
+          return a[0] - b[0];
+        });
+
+        eventArr.forEach((el) => {
+          if (el[1] === 's') {
+            count++;
+          } else {
+            count--;
+          }
+          max = Math.max(count, max);
+        });
+
+        return max;
+      }
+
+      let arr = [
+        [14, 18],
+        [12, 15],
+        [15, 20],
+        [20, 30],
+        [5, 14],
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
