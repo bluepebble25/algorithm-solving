@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        DVD 용량의 최소값은 아마 평균에 가까울 것이다.
+        하지만 모든 수를 해보지 않으면 최선의 경우를 찾을 수 없으므로 모두 해봐야 하는데
+        적어도 가능한 범위는 좁혀볼 수는 있다.
+        1) 한 노래를 여러개로 쪼갤 수는 없으므로 한 DVD당 한 노래만 담는다고 치면
+           적어도 DVD의 최소 용량은 노래 중 가장 긴 곡 정도는 돼야한다.
+           예시에서는 9
+        2) 모든 노래를 DVD 하나에 담는 경우 DVD 크기는 모든 노래의 길이를 합한 값
+           예시에서는 45
+        
+        DVD 용량을 가능한 범위 내에서 한 개 정하고
+        그 용량만큼 되도록 그룹을 쪼갠 다음 그룹의 개수를 검사한다.
+        하지만 용량의 최소값과 최대값의 격차가 매우 크면 복잡도가 매우 커진다.
+        그런데
+        1) 그룹 개수가 M보다 크다면
+          -> 용량을 작게 잡았다는 뜻이므로 dvd의 크기를 늘린다.
+             start = mid + 1;
+        2) M보다 작다면
+          -> 용량을 크게 잡았다는 뜻이므로 용량을 줄인다.
+             end를 mid-1 하고 다시 검색
+        3) 같다면
+          -> 답은 mid
+        근데 M보다 작거나 같은 경우 모두 답이 될 수 있다.
+        어쨌거나 하나의 용량이 최소여야 한다고 했지 DVD 개수가 정확히 M개여야 한다는 것은 아니므로.
+        그러므로 count <= M 인 경우를 묶어서 생각해도 된다.
+      */
+
+      // 들어온 파라미터 크기만큼 리스트를 쪼개서 그룹의 개수를 반환하는 함수
+      function getGroupNum(capacity, arr) {
+        let count = 1;
+        let sum = 0;
+        for (let n of arr) {
+          if (sum + n > capacity) {
+            count++;
+            sum = n;
+          } else {
+            sum += n;
+          }
+        }
+        return count;
+      }
+
+      function solution(M, arr) {
+        let answer;
+        let start = Math.max(...arr);
+        let end = arr.reduce((acc, curr) => acc + curr, 0);
+
+        while (start <= end) {
+          let mid = Math.round((start + end) / 2);
+          let count = getGroupNum(mid, arr);
+
+          if (count > M) {
+            start = mid + 1;
+          } else {
+            end = mid - 1;
+            answer = mid;
+          }
+        }
+        return answer;
+      }
+
+      let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>
