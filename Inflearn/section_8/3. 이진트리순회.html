@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /*
+        1. 전위순회
+        - 부모, 왼, 오
+        - N 출력, preorder(N*2), preorder(N*2+1)
+        2. 중위순회
+        -  가장 깊은 곳부터 왼, 부모, 오 순으로
+        - inorder(N*2), N 출력, inorder(N*2+1)
+        3. 후위순회
+        - 가장 깊은 곳부터 왼, 오, 부모 순으로
+        - postorder(N*2), postorder(N*2+1), N 출력
+      */
+      function preorder(node) {
+        if (node > 7) {
+          return;
+        } else {
+          console.log(node);
+          preorder(node * 2);
+          preorder(node * 2 + 1);
+        }
+      }
+
+      function inorder(node) {
+        if (node > 7) {
+          return;
+        } else {
+          inorder(node * 2);
+          console.log(node);
+          inorder(node * 2 + 1);
+        }
+      }
+
+      function postorder(node) {
+        if (node > 7) {
+          return;
+        } else {
+          postorder(node * 2);
+          postorder(node * 2 + 1);
+          console.log(node);
+        }
+      }
+
+      function solution(N) {
+        // preorder(N);
+        // inorder(N);
+        postorder(N);
+      }
+
+      solution(1);
+    </script>
+  </body>
+</html>
